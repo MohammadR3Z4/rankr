@@ -144,13 +144,13 @@ install-protoc-plugins:
 
 install-buf:
 	@echo "Installing Buf $(BUF_VERSION)..."
-	@if command -v buf &> /dev/null && buf --version &> /dev/null; then \
-	   CURRENT_VERSION=$(buf --version | sed 's/^v//'); \
-	   EXPECTED_VERSION=$(echo "$(BUF_VERSION)" | sed 's/^v//'); \
-	   if [ "$CURRENT_VERSION" = "$EXPECTED_VERSION" ]; then \
+	@if command -v buf >/dev/null 2>&1 && buf --version >/dev/null 2>&1; then \
+	   CURRENT_VERSION=$$(buf --version | sed 's/^v//'); \
+	   EXPECTED_VERSION=$$(echo "$(BUF_VERSION)" | sed 's/^v//'); \
+	   if [ "$$CURRENT_VERSION" = "$$EXPECTED_VERSION" ]; then \
 	      echo "Buf $(BUF_VERSION) is already installed"; \
 	   else \
-	      echo "Buf version mismatch. Expected $(BUF_VERSION), found $CURRENT_VERSION. Reinstalling..."; \
+	      echo "Buf version mismatch. Expected $(BUF_VERSION), found $$CURRENT_VERSION. Reinstalling..."; \
 	      $(MAKE) install-buf-force; \
 	   fi; \
 	else \
