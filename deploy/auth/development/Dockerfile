@@ -1,4 +1,7 @@
-FROM golang:1.25-alpine
+ARG GO_IMAGE_NAME
+ARG GO_IMAGE_VERSION
+
+FROM ${GO_IMAGE_NAME}:${GO_IMAGE_VERSION}
 
 WORKDIR /app
 ENV GOPROXY=https://mirrors.aliyun.com/goproxy,direct
